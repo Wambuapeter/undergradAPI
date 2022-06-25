@@ -114,6 +114,11 @@ def new_user():
     session.commit()
     return jsonify({ 'admin': user.username }), 201#, {'Location': url_for('get_user', id = user.id, _external = True)}
 
+@app.route('/')
+def index():
+    return "Welcome to undergrads mentorships and scholarships API :) use\
+                '/mentorships': for all mentorship programs available, \
+                '/scholarships': for all scholarship programs available"
 
 @app.route('/mentorships', methods = ['GET'])
 def indexMentorships():
@@ -138,6 +143,16 @@ def create_mentorships():
     mentorships = mentorships_schema.load(data)
     result = mentorships_schema.dump(data)
     mentorships.create()
+    return make_response(jsonify({"program": result}),201)
+
+@app.route('/createScholarships', methods = ['POST'])
+@auth.login_required
+def create_scholarships():
+    data = request.get_json()
+    scholarships_schema = ScholarshipsSchema()
+    scholarships = scholarships_schema.load(data)
+    result = scholarships_schema.dump(data)
+    scholarships.create()
     return make_response(jsonify({"program": result}),201)
 
 if __name__ == '__main__':
