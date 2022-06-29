@@ -155,5 +155,21 @@ def create_scholarships():
     scholarships.create()
     return make_response(jsonify({"program": result}),201)
 
+@app.route('/deleteMentorships/<id>', methods = ['DELETE'])
+@auth.login_required
+def delete_mentorship_by_id(id):
+    get_mentorships = Mentorships.query.filter_by(id=id).one()
+    db.session.delete(get_mentorships)
+    db.session.commit()
+    return make_response("",204)
+
+@app.route('/deleteScholarships/<id>', methods = ['DELETE'])
+@auth.login_required
+def delete_scholarship_by_id(id):
+    get_scholarships = Scholarships.query.filter_by(id=id).one()
+    db.session.delete(get_scholarships)
+    db.session.commit()
+    return make_response("",204)
+
 if __name__ == '__main__':
     app.run(debug=True)
