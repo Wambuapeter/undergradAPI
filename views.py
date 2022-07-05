@@ -23,8 +23,8 @@ db = SQLAlchemy(app)
 
 class Mentorships(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(20))
-    description = db.Column(db.String(50))
+    name = db.Column(db.String(40))
+    description = db.Column(db.String(250))
     link = db.Column(db.String(50))
 
     def create(self):
@@ -42,8 +42,8 @@ class Mentorships(db.Model):
 
 class Scholarships(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(20))
-    description = db.Column(db.String(50))
+    name = db.Column(db.String(40))
+    description = db.Column(db.String(250))
     link = db.Column(db.String(50))
 
     def create(self):
